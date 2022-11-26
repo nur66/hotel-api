@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.js"; // harus pake extensi
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import usersRoute from "./routes/users.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();
@@ -24,6 +25,7 @@ mongoose.connection.on("disconnected", () => {
 })
 
 // middleware
+app.use(cookieParser())
 app.use(express.json()) // agar bisa menggunakan json di body postmannya
 
 app.use("/api/auth", authRoute) // harus pake slash didepan endpointnya, kalau tidak maka 404
