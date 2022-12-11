@@ -28,6 +28,14 @@ mongoose.connection.on("disconnected", () => {
 app.use(cookieParser())
 app.use(express.json()) // agar bisa menggunakan json di body postmannya
 
+// agar tidak CORS origin
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'Content-Type, Authorization');
+  next();
+})
+
 app.use("/api/auth", authRoute) // harus pake slash didepan endpointnya, kalau tidak maka 404
 app.use("/api/users", usersRoute)
 app.use("/api/hotels", hotelsRoute)
